@@ -1635,19 +1635,19 @@ class Idefics2Model(Idefics2PreTrainedModel):
             patches_subgrid = patches_subgrid.unfold(dimension=2, size=patch_size, step=patch_size)
             patch_attention_mask = (patches_subgrid.sum(dim=(-1, -2)) > 0).bool()
 
-            breakpoint()
+            # breakpoint()
             # Get sequence from the vision encoder
             image_hidden_states = self.vision_model(
                 pixel_values=pixel_values,
                 patch_attention_mask=patch_attention_mask,
             ).last_hidden_state
-            breakpoint()
+            # breakpoint()
 
             # Modality projection & resampling
             image_hidden_states = self.connector(
                 image_hidden_states, attention_mask=patch_attention_mask.view(pixel_values.size(0), -1)
             )
-            breakpoint()
+            # breakpoint()
 
         elif image_hidden_states is not None:
             image_hidden_states = image_hidden_states.to(dtype=self.dtype, device=input_ids.device)
@@ -1660,6 +1660,7 @@ class Idefics2Model(Idefics2PreTrainedModel):
                 inputs_embeds=inputs_embeds,
                 image_hidden_states=image_hidden_states,
             )
+            breakpoint()
 
         outputs = self.text_model(
             inputs_embeds=inputs_embeds,
