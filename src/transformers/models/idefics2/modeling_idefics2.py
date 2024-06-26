@@ -1660,8 +1660,8 @@ class Idefics2Model(Idefics2PreTrainedModel):
                 inputs_embeds=inputs_embeds,
                 image_hidden_states=image_hidden_states,
             )
-            breakpoint()
 
+        breakpoint()
         outputs = self.text_model(
             inputs_embeds=inputs_embeds,
             attention_mask=attention_mask,
